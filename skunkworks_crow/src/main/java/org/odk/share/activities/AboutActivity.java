@@ -21,6 +21,7 @@ import static org.odk.share.activities.WebViewActivity.OPEN_URL;
 public class AboutActivity extends AppCompatActivity implements OnItemClickListener {
 
     private static final String LICENSES_HTML_PATH = "file:///android_asset/open_source_licenses.html";
+    private static final String ABOUT_HTML_PATH = "file:///android_asset/about_app.html";
 
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
@@ -43,17 +44,28 @@ public class AboutActivity extends AppCompatActivity implements OnItemClickListe
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        int[][] listItems = {{R.string.open_source_licenses, R.drawable.ic_stars}};
+        int[][] listItems = {{R.string.open_source_licenses, R.drawable.ic_stars}, {R.string.about_app, R.drawable.ic_stars}};
         adapter = new AboutAdapter(this, listItems, this);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onItemClick(View view, int position) {
+
         if (position == 0) {
+
             Intent intent = new Intent(this, WebViewActivity.class);
             intent.putExtra(OPEN_URL, LICENSES_HTML_PATH);
+            intent.putExtra("POS_SELECTED", 0);
             startActivity(intent);
         }
+        if (position == 1){
+            Intent intent = new Intent(this, WebViewActivity.class);
+            intent.putExtra(OPEN_URL, ABOUT_HTML_PATH);
+            intent.putExtra("POS_SELECTED", 1);
+
+            startActivity(intent);
+        }
+
     }
 }

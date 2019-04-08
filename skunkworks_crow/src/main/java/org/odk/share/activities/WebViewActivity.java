@@ -14,7 +14,9 @@
 
 package org.odk.share.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebResourceError;
@@ -22,7 +24,6 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-
 import org.odk.share.R;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +39,7 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_view);
+       setContentView(R.layout.activity_web_view);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,12 +49,21 @@ public class WebViewActivity extends AppCompatActivity {
         String url = getIntent().getStringExtra(OPEN_URL);
         webView = (WebView) findViewById(R.id.webView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        webView.getSettings().setDomStorageEnabled(true);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
+                // Checking which postion of recyclerView was clicked, so the same name will
+                // be shown on Support Action Bar
+                // Reference: 'if' statement in AboutActivity class
+                Intent intent = getIntent();
+                Integer position = intent.getIntExtra("POS_SELECTED", 0);
+                if (position==0)
                 getSupportActionBar().setTitle(getString(R.string.open_source_licenses));
+                if (position==1)
+                    getSupportActionBar().setTitle("Skunkworks-crow");
                 progressBar.setVisibility(View.VISIBLE);
                 invalidateOptionsMenu();
             }

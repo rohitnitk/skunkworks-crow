@@ -40,6 +40,9 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull final AboutAdapter.ViewHolder holder, int position) {
         holder.title.setText(context.getString(listItems[position][0]));
         holder.icon.setImageDrawable(context.getResources().getDrawable(listItems[position][1]));
+       // Set title for About App entry in RecyclerView used in AboutActivity.java
+        holder.title.setText(context.getString(listItems[position][0]));
+        holder.icon.setImageDrawable(context.getResources().getDrawable(listItems[position][1]));
         holder.itemView.setOnClickListener(v -> listener.onItemClick(v, holder.getAdapterPosition()));
     }
 

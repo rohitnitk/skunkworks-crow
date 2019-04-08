@@ -87,6 +87,8 @@ public class SettingsPreference extends PreferenceActivity {
                 case PreferenceKeys.KEY_HOTSPOT_PASSWORD:
                     String password = newValue.toString();
                     if (password.length() < 8) {
+
+
                         Toast.makeText(getBaseContext(), getString(R.string.hotspot_password_error), Toast.LENGTH_LONG).show();
                         return false;
                     }

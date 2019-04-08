@@ -41,7 +41,8 @@ public final class FormsProviderAPI {
         public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/forms");
 
         /**
-         * The content:// style URL for accessing the newest versions of Forms. For each
+         * The conten
+         * t:// style URL for accessing the newest versions of Forms. For each
          * {@link FormsColumns#JR_FORM_ID}, only the version with the most recent
          * {@link FormsColumns#DATE} is included.
          */
